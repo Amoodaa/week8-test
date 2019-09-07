@@ -8,11 +8,13 @@ exports.renderCities = (req, res) => {
 };
 
 exports.getAllCities = (req, res, next) => {
-  getCities()
-    .then(result => {
-      res.json(result.rows);
-    })
-    .catch(err => next(err));
+  if (req.user.isLogged)
+    getCities()
+      .then(result => {
+        res.json(result.rows);
+      })
+      .catch(err => next(err));
+  else res.status(401).send('plz login first');
 };
 
 exports.add = (req, res, next) => {
