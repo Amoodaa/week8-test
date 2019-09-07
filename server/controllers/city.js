@@ -19,7 +19,9 @@ exports.getAllCities = (req, res, next) => {
 
 exports.add = (req, res, next) => {
   const cityInfo = req.body;
-  addCity(cityInfo)
-    .then(() => res.redirect('/cities'))
-    .catch(err => next(err));
+  if (req.user.isLogged)
+    addCity(cityInfo)
+      .then(() => res.redirect('/cities'))
+      .catch(err => next(err));
+  else res.status(401).send('plz login first');
 };

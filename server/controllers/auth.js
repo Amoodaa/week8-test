@@ -6,7 +6,7 @@ exports.auth = (req, res, next) => {
     if (err) throw err;
     const { isLogged } = result;
     if (isLogged) {
-      req.user.isLogged = isLogged;
+      req.user = { isLogged };
       next();
     } else res.redirect('/');
   });
