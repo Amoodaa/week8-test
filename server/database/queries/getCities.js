@@ -1,9 +1,5 @@
 const dbConnection = require('../config/connection');
 
-const getCities = () => {
+exports.getCities = () => {
   return dbConnection.query(`SELECT * FROM city;`);
-};
-
-module.exports = {
-  getCities
 };
